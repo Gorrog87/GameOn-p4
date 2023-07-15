@@ -277,12 +277,12 @@ function validateOptions() {
 function validateTermsOfUse() {
   let isValid = false;
   const termsOfUse = termsOfUseField.checked;
-  // const termsOfUseError = document.getElementById("terms-of-use-error");
+  const termsOfUseError = document.getElementById("terms-of-use-error");
   if (!termsOfUse) {
-    // termsOfUseError.innerHTML = ERROR_MESSAGE.termsOfUse;
+    termsOfUseError.innerHTML = ERROR_MESSAGE.termsOfUse;
     isValid = false;
   } else {
-    // termsOfUseError.innerHTML = "";
+    termsOfUseError.innerHTML = "";
     isValid = true;
   }
   return isValid;
