@@ -8,6 +8,7 @@ const formDataEmail = document.getElementById("form-data-email");
 const birthdateField = document.getElementById("birthdate");
 const formDataBirthdate = document.getElementById("form-data-birthdate");
 const tournamentQuantityField = document.getElementById("tournament-quantity");
+const formDataTournaments = document.getElementById("form-data-tournaments");
 const locationField1 = document.getElementById("location1");
 const locationField2 = document.getElementById("location2");
 const locationField3 = document.getElementById("location3");
@@ -200,21 +201,22 @@ emailField.addEventListener("blur", validateEmail);
 function validateBirthdate() {
   let isValid = false;
   const birthdate = birthdateField.value;
-  // const birthDateError = document.getElementById("birthdate-error");
   const birthDateRegex =
     /^(0?[1-9]|[1-2][0-9]|3[0-1])([\s.-\\/])(0?[1-9]|1[0-2])\2((19|20)\d\d)$/; // regex qui accepte les date de naissances avec les espace, "/", "-" et ".", elle n'accepte que les noombres jusqu'à 31 pour les jours, 12 pour les mois et avvec uniquement les années commençant par 1900 ou 2000.
   if (birthdate.trim() == "") {
-    // birthDateError.innerHTML = ERROR_MESSAGE.emptyField;
+    formDataBirthdate.setAttribute("data-accepted-visible", false);
     formDataBirthdate.setAttribute("data-error-visible", true);
     formDataBirthdate.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
     isValid = false;
   } else if (!birthDateRegex.test(birthdate)) {
-    // birthDateError.innerHTML = ERROR_MESSAGE.invalidBirthDate;
+    formDataBirthdate.setAttribute("data-accepted-visible", false);
     formDataBirthdate.setAttribute("data-error-visible", true);
+    formDataBirthdate.setAttribute("data-error", `${ERROR_MESSAGE.invalidBirthDate}`);
     isValid = false;
   } else {
-    // birthDateError.innerHTML = "";
     formDataBirthdate.setAttribute("data-error-visible", false);
+    formDataBirthdate.setAttribute("data-error", "");
+    formDataBirthdate.setAttribute("data-accepted-visible", true);
     isValid = true;
   }
   return isValid;
@@ -224,14 +226,25 @@ birthdateField.addEventListener("blur", validateBirthdate);
 function validateTournamentNumber() {
   isValide = false;
   const tournamentQuantity = tournamentQuantityField.value;
-  const tournamentQuantityError = document.getElementById("tournament-error");
+  // const tournamentQuantityError = document.getElementById("tournament-error");
   if (tournamentQuantity.trim() == "") {
-    tournamentQuantityError.innerHTML = ERROR_MESSAGE.emptyField;
+    // tournamentQuantityError.innerHTML = ERROR_MESSAGE.emptyField;
+    formDataTournaments.setAttribute("data-error-visible", true);
+    formDataTournaments.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
+    formDataTournaments.setAttribute("data-accepted-visible", false);
+    isValid = false;
   } else if (isNaN(tournamentQuantity)) {
     // iNaN() vérifie si la variable n'est pas un chiffre et renvoie un booléen;
-    tournamentQuantityError.innerHTML = ERROR_MESSAGE.onlyIntegers;
+    // tournamentQuantityError.innerHTML = ERROR_MESSAGE.onlyIntegers;
+    formDataTournaments.setAttribute("data-error-visible", true);
+    formDataTournaments.setAttribute("data-error", `${ERROR_MESSAGE.onlyIntegers}`);
+    formDataTournaments.setAttribute("data-accepted-visible", false);
+    isValid = false
   } else {
-    tournamentQuantityError.innerHTML = "";
+    // tournamentQuantityError.innerHTML = "";
+    formDataTournaments.setAttribute("data-accepted-visible", true);
+    formDataTournaments.setAttribute("data-error-visible", false);
+    formDataTournaments.setAttribute("data-error", ``);
     isValide = true;
   }
   return isValide;
