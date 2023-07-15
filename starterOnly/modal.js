@@ -9,7 +9,6 @@ const birthdateField = document.getElementById("birthdate");
 const formDataBirthdate = document.getElementById("form-data-birthdate");
 const tournamentQuantityField = document.getElementById("tournament-quantity");
 const formDataTournaments = document.getElementById("form-data-tournaments");
-const formDataLocation = document.getElementById("form-data-location");
 const locationField1 = document.getElementById("location1");
 const locationField2 = document.getElementById("location2");
 const locationField3 = document.getElementById("location3");
@@ -58,6 +57,16 @@ window.onclick = function (event) {
     bground.style.display = "none";
     form.style.display = "block";
     thankYou.innerHTML = "";
+    const formData = [
+      formDataFirstname,
+      formDataLastname,
+      formDataEmail,
+      formDataBirthdate,
+      formDataTournaments,
+    ];
+    formData.map((formData) =>
+      formData.setAttribute("data-accepted-visible", false)
+    ); // retire la bordure verte pour chaque champ au rechargement du formulaire
   }
 };
 
@@ -81,7 +90,7 @@ const ERROR_MESSAGE = {
   onlyIntegers: "veuillez entrer uniquement des chiffres",
   onlyChars: "veuillez saisir uniquement des lettres",
   option: "Veuillez cocher un lieu s'il vous plait",
-  termsOfUse: "Veuillez accepter les termes et conditions"
+  termsOfUse: "Veuillez accepter les termes et conditions",
 };
 
 function validateFirstName() {
@@ -125,10 +134,7 @@ function validateLastName() {
   const lastnameRegex = /^[a-zA-Z]+$/;
   if (lastname.trim() == "") {
     formDataLastname.setAttribute("data-error-visible", true);
-    formDataLastname.setAttribute(
-      "data-error",
-      `${ERROR_MESSAGE.emptyField}`
-    );
+    formDataLastname.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
     formDataLastname.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (/[\d]/.test(lastname)) {
@@ -196,7 +202,10 @@ function validateBirthdate() {
   } else if (!birthDateRegex.test(birthdate)) {
     formDataBirthdate.setAttribute("data-accepted-visible", false);
     formDataBirthdate.setAttribute("data-error-visible", true);
-    formDataBirthdate.setAttribute("data-error", `${ERROR_MESSAGE.invalidBirthDate}`);
+    formDataBirthdate.setAttribute(
+      "data-error",
+      `${ERROR_MESSAGE.invalidBirthDate}`
+    );
     isValid = false;
   } else {
     formDataBirthdate.setAttribute("data-error-visible", false);
@@ -213,15 +222,21 @@ function validateTournamentNumber() {
   const tournamentQuantity = tournamentQuantityField.value;
   if (tournamentQuantity.trim() == "") {
     formDataTournaments.setAttribute("data-error-visible", true);
-    formDataTournaments.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
+    formDataTournaments.setAttribute(
+      "data-error",
+      `${ERROR_MESSAGE.emptyField}`
+    );
     formDataTournaments.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (isNaN(tournamentQuantity)) {
     // iNaN() vérifie si la variable n'est pas un chiffre et renvoie un booléen;
     formDataTournaments.setAttribute("data-error-visible", true);
-    formDataTournaments.setAttribute("data-error", `${ERROR_MESSAGE.onlyIntegers}`);
+    formDataTournaments.setAttribute(
+      "data-error",
+      `${ERROR_MESSAGE.onlyIntegers}`
+    );
     formDataTournaments.setAttribute("data-accepted-visible", false);
-    isValid = false
+    isValid = false;
   } else {
     formDataTournaments.setAttribute("data-accepted-visible", true);
     formDataTournaments.setAttribute("data-error-visible", false);
@@ -240,7 +255,7 @@ function validateOptions() {
   const location4 = locationField4.checked;
   const location5 = locationField5.checked;
   const location6 = locationField6.checked;
-  const optionError = document.getElementById("option-error");  // balise <p> rajoutée pour gérer et afficher les messages d'erreur pour les checkbox
+  const optionError = document.getElementById("option-error"); // balise <p> rajoutée pour gérer et afficher les messages d'erreur pour les checkbox
   if (
     location1 ||
     location2 ||
