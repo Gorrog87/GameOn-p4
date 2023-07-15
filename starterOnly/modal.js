@@ -95,9 +95,9 @@ const ERROR_MESSAGE = {
 
 function validateFirstName() {
   let isValid = false; // rend la fonction fausse par défaut en attendant la bonne valeur
-  const firstname = firstnameField.value; // récupération du champ correspondant dans le html en l'occurence ici, l'id first-name
+  const firstname = firstnameField.value; // récupération de la valeur du champ
   if (firstname.trim() == "") {
-    // .trim() permet de supprimer les espaces en trop qund on récupère la valeur du champ.
+    // .trim() permet de supprimer les espaces en trop quand on récupère la valeur du champ.
     formDataFirstname.setAttribute("data-error-visible", true);
     formDataFirstname.setAttribute("data-accepted-visible", false);
     formDataFirstname.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
