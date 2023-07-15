@@ -9,6 +9,7 @@ const birthdateField = document.getElementById("birthdate");
 const formDataBirthdate = document.getElementById("form-data-birthdate");
 const tournamentQuantityField = document.getElementById("tournament-quantity");
 const formDataTournaments = document.getElementById("form-data-tournaments");
+const formDataLocation = document.getElementById("form-data-location");
 const locationField1 = document.getElementById("location1");
 const locationField2 = document.getElementById("location2");
 const locationField3 = document.getElementById("location3");
@@ -226,22 +227,18 @@ birthdateField.addEventListener("blur", validateBirthdate);
 function validateTournamentNumber() {
   isValide = false;
   const tournamentQuantity = tournamentQuantityField.value;
-  // const tournamentQuantityError = document.getElementById("tournament-error");
   if (tournamentQuantity.trim() == "") {
-    // tournamentQuantityError.innerHTML = ERROR_MESSAGE.emptyField;
     formDataTournaments.setAttribute("data-error-visible", true);
     formDataTournaments.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
     formDataTournaments.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (isNaN(tournamentQuantity)) {
     // iNaN() vérifie si la variable n'est pas un chiffre et renvoie un booléen;
-    // tournamentQuantityError.innerHTML = ERROR_MESSAGE.onlyIntegers;
     formDataTournaments.setAttribute("data-error-visible", true);
     formDataTournaments.setAttribute("data-error", `${ERROR_MESSAGE.onlyIntegers}`);
     formDataTournaments.setAttribute("data-accepted-visible", false);
     isValid = false
   } else {
-    // tournamentQuantityError.innerHTML = "";
     formDataTournaments.setAttribute("data-accepted-visible", true);
     formDataTournaments.setAttribute("data-error-visible", false);
     formDataTournaments.setAttribute("data-error", ``);
@@ -280,12 +277,12 @@ function validateOptions() {
 function validateTermsOfUse() {
   let isValid = false;
   const termsOfUse = termsOfUseField.checked;
-  const termsOfUseError = document.getElementById("terms-of-use-error");
+  // const termsOfUseError = document.getElementById("terms-of-use-error");
   if (!termsOfUse) {
-    termsOfUseError.innerHTML = ERROR_MESSAGE.termsOfUse;
+    // termsOfUseError.innerHTML = ERROR_MESSAGE.termsOfUse;
     isValid = false;
   } else {
-    termsOfUseError.innerHTML = "";
+    // termsOfUseError.innerHTML = "";
     isValid = true;
   }
   return isValid;
