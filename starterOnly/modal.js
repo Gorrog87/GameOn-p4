@@ -304,6 +304,6 @@ function validate(e) {
   } else {
     isValid = false;
   }
-  e.preventDefault(); // prevnetDefault permet de ne pas recharger la page après une action.
+  e.preventDefault(); // preventDefault permet de ne pas recharger la page après une action.
   return isValid;
 }
