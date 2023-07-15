@@ -87,11 +87,8 @@ const ERROR_MESSAGE = {
 function validateFirstName() {
   let isValid = false; // rend la fonction fausse par défaut en attendant la bonne valeur
   const firstname = firstnameField.value; // récupération du champ correspondant dans le html en l'occurence ici, l'id first-name
-  const firstNameError = document.getElementById("firstname-error"); //champ qui permet d'afficher les messages d'erreur si besoin.
-  const stringRegex = /^[a-zA-Z\s-]+$/; // regex qui accepte les lettres majuscules et minuscules répétables, espaces et traits d'union
   if (firstname.trim() == "") {
     // .trim() permet de supprimer les espaces en trop qund on récupère la valeur du champ.
-    // firstNameError.innerHTML = ERROR_MESSAGE.emptyField; // message d'erreur pour un champ vide.
     formDataFirstname.setAttribute("data-error-visible", true);
     formDataFirstname.setAttribute("data-accepted-visible", false);
     formDataFirstname.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
@@ -99,14 +96,12 @@ function validateFirstName() {
   } else if (/[\d]/.test(firstname)) {
     // regex qui permet de détecter s'il y a des chiffres.
     // .test() permet de comparer si la variable donnée est identique à la regex
-    // firstNameError.innerHTML = ERROR_MESSAGE.onlyChars; // message d'erreur qui demande a insérer des lettres uniqueemnt
     formDataFirstname.setAttribute("data-error-visible", true);
     formDataFirstname.setAttribute("data-accepted-visible", false);
     formDataFirstname.setAttribute("data-error", `${ERROR_MESSAGE.onlyChars}`);
     isValid = false;
   } else if (firstname.length < 2) {
-    // vérifie si le champ inséré n'est pas inférieur à une chaine de caractère inférieure à 2
-    // firstNameError.innerHTML = ERROR_MESSAGE.tooShortFirstName; // message d'erreur qui annonce une chaine de caracte1re trop courte pour être acceptée
+    // vérifie si le champ inséré n'est pas une chaine de caractère inférieure à 2
     formDataFirstname.setAttribute("data-error-visible", true);
     formDataFirstname.setAttribute("data-accepted-visible", false);
     formDataFirstname.setAttribute(
@@ -118,7 +113,6 @@ function validateFirstName() {
     formDataFirstname.setAttribute("data-error-visible", false);
     formDataFirstname.setAttribute("data-error", "");
     formDataFirstname.setAttribute("data-accepted-visible", true);
-    // firstNameError.innerHTML = ""; // vide le champ des message d'erreur
     isValid = true; // la condition est bonne, on passe donc la valeur a vrai.
   }
   return isValid; // on retourne la valeur vrai à la sortie de la fonction.
@@ -128,10 +122,8 @@ firstnameField.addEventListener("blur", validateFirstName); // "blur" permet de 
 function validateLastName() {
   let isValid = false;
   const lastname = lastnameField.value;
-  // const lastNameError = document.getElementById("lastname-error");
   const lastnameRegex = /^[a-zA-Z]+$/;
   if (lastname.trim() == "") {
-    // lastNameError.innerHTML = ERROR_MESSAGE.emptyField;
     formDataLastname.setAttribute("data-error-visible", true);
     formDataLastname.setAttribute(
       "data-error",
@@ -140,13 +132,11 @@ function validateLastName() {
     formDataLastname.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (/[\d]/.test(lastname)) {
-    // lastNameError.innerHTML = ERROR_MESSAGE.onlyChars;
     formDataLastname.setAttribute("data-error-visible", true);
     formDataLastname.setAttribute("data-error", `${ERROR_MESSAGE.onlyChars}`);
     formDataLastname.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (lastname.length < 2) {
-    // lastNameError.innerHTML = ERROR_MESSAGE.tooShortLastName;
     formDataLastname.setAttribute("data-error-visible", true);
     formDataLastname.setAttribute(
       "data-error",
@@ -155,13 +145,11 @@ function validateLastName() {
     formDataLastname.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (!lastnameRegex.test(lastname)) {
-    // lastNameError.innerHTML = ERROR_MESSAGE.notAString;
     formDataLastname.setAttribute("data-error-visible", true);
     formDataLastname.setAttribute("data-error", `${ERROR_MESSAGE.notAString}`);
     formDataLastname.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else {
-    // lastNameError.innerHTML = "";
     formDataLastname.setAttribute("data-error-visible", false);
     formDataLastname.setAttribute("data-error", "");
     formDataLastname.setAttribute("data-accepted-visible", true);
@@ -175,21 +163,17 @@ function validateEmail() {
   let isValid = false;
   const email = emailField.value;
   const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/; // Regex qui valide les adresses mail
-  // const emailError = document.getElementById("email-error");
   if (email.trim() == "") {
-    // emailError.innerHTML = ERROR_MESSAGE.emptyField; // renvoi un message d'erreur si le champ est vide
     formDataEmail.setAttribute("data-error-visible", true);
     formDataEmail.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
     formDataEmail.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (!emailRegex.test(email)) {
-    // emailError.innerHTML = ERROR_MESSAGE.invalidEmail; // renvoi un message d'email invalide après avoir testé la valeur du champ avec la methode .test()
     formDataEmail.setAttribute("data-error-visible", true);
     formDataEmail.setAttribute("data-error", `${ERROR_MESSAGE.invalidEmail}`);
     formDataEmail.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else {
-    // emailError.innerHTML = "";
     formDataEmail.setAttribute("data-error-visible", false);
     formDataEmail.setAttribute("data-error", "");
     formDataEmail.setAttribute("data-accepted-visible", true);
@@ -256,7 +240,7 @@ function validateOptions() {
   const location4 = locationField4.checked;
   const location5 = locationField5.checked;
   const location6 = locationField6.checked;
-  const optionError = document.getElementById("option-error");
+  const optionError = document.getElementById("option-error");  // balise <p> rajoutée pour gérer et afficher les messages d'erreur pour les checkbox
   if (
     location1 ||
     location2 ||
@@ -265,10 +249,10 @@ function validateOptions() {
     location5 ||
     location6
   ) {
-    optionError.innerHTML = "";
+    optionError.innerHTML = ""; // si au moins une checkbox est cochée(true), alors rien nes'affiche
     isValid = true;
   } else {
-    optionError.innerHTML = ERROR_MESSAGE.option;
+    optionError.innerHTML = ERROR_MESSAGE.option; // si aucune checkbox n'est cochée, alors on affiche un message d'erreur sous toute sles checkbox
     isValid = false;
   }
   return isValid;
