@@ -127,7 +127,7 @@ function validateLastName() {
     formDataLastname.setAttribute("data-error-visible", true);
     formDataLastname.setAttribute(
       "data-error",
-      `${ERROR_MESSAGE.tooShortLastname}`
+      `${ERROR_MESSAGE.emptyField}`
     );
     formDataLastname.setAttribute("data-accepted-visible", false);
     isValid = false;

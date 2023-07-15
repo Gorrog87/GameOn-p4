@@ -17,7 +17,8 @@
   <body>
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
-        <img alt="logo" src="Logo.png" width="auto" height="auto" class="logo"/>
+        <!-- width="auto" height="auto" retirés de la balise image pour passer le w3c -->
+        <img alt="logo" src="Logo.png"  class="logo"/>
       </div>
       <div class="main-navbar">
         <a href="#" class="active"><span>Accueil</span></a>
@@ -58,34 +59,34 @@
             <form name="reserve" action="index.html" method="get" id="form">
               <div class="formData" id="form-data-firstname">
                 <label>Prénom</label><br />
+                <!-- for="first-name" mis en commentaire et hors de l'input pour passer le w3c -> "for is not allowed" -->
                 <input
                   class="text-control"
                   type="text"
                   id="first-name"
                   name="first-name"
-                  for="first-name"
                   placeholder="Fabien"
                 /><br />
               </div>
               <div class="formData" id="form-data-lastname">
                 <label>Nom</label><br />
+                <!-- for="last-name" -->
                 <input
                   class="text-control"
                   type="text"
                   id="last-name"
                   name="last-name"
-                  for="last-name"
                   placeholder="Dupont"
                 /><br />
               </div>
               <div class="formData" id="form-data-email">
                 <label>E-mail</label><br />
+                <!-- for="email" -->
                 <input
                   class="text-control"
                   type="email"
                   id="email"
                   name="email"
-                  for="email"
                   placeholder="exemple@exemple.fr"
                 /><br />
               </div>
@@ -99,12 +100,12 @@
                   name="birthdate"
                   for="birthdate"
                 /><br /> -->
-                <input type="text"
+                <!-- for="birthdate" -->
+                <input
                 type="text"
                 class="text-control"
                 id="birthdate"
                 name="birthdate"
-                for="birthdate"
                 placeholder="jj/mm/aaaa">
                 <br>
               </div>
@@ -127,7 +128,8 @@
                 class="text-control"
                 id="tournament-quantity"
                 name="quantity"
-                for="tournament-quantity">
+                >
+                <!-- for="tournament-quantity" initialement placée à la ligne 131 -->
               </div>
               <p class="text-label">
                 A quel tournoi souhaitez-vous participer cette année ?
@@ -225,10 +227,10 @@
               <input
                 class="btn-submit"
                 type="button"
-                class="button"
                 value="C'est parti"
                 id="submit-btn"
-              />
+                />
+                <!-- class="button" -->
             </form>
             <h6 id="thank-you"></h6>
           </div>
