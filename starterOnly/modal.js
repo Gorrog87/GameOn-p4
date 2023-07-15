@@ -64,7 +64,7 @@ window.onclick = function (event) {
       formDataBirthdate,
       formDataTournaments,
     ];
-    formData.map((formData) =>
+    formData.map((formData) => // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
       formData.setAttribute("data-accepted-visible", false)
     ); // retire la bordure verte pour chaque champ au rechargement du formulaire
   }
@@ -95,22 +95,22 @@ const ERROR_MESSAGE = {
 
 function validateFirstName() {
   let isValid = false; // rend la fonction fausse par défaut en attendant la bonne valeur
-  const firstname = firstnameField.value; // récupération de la valeur du champ
+  const firstname = firstnameField.value; // récupération de la valeur du champ https://www.w3docs.com/snippets/javascript/how-to-get-the-value-of-text-input-field-using-javascript.html
   if (firstname.trim() == "") {
-    // .trim() permet de supprimer les espaces en trop quand on récupère la valeur du champ.
-    formDataFirstname.setAttribute("data-error-visible", true);
+    // .trim() permet de supprimer les espaces en trop quand on récupère la valeur du champ. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/trim
+    formDataFirstname.setAttribute("data-error-visible", true); // setAttribute() permet d'assigner ou de modifier une valeur https://developer.mozilla.org/fr/docs/Web/API/Element/setAttribute
     formDataFirstname.setAttribute("data-accepted-visible", false);
     formDataFirstname.setAttribute("data-error", `${ERROR_MESSAGE.emptyField}`);
     isValid = false; // la condition reste fausse
   } else if (/[\d]/.test(firstname)) {
     // regex qui permet de détecter s'il y a des chiffres.
-    // .test() permet de comparer si la variable donnée est identique à la regex
+    // .test() permet de comparer si la variable donnée est identique à la regex https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test
     formDataFirstname.setAttribute("data-error-visible", true);
     formDataFirstname.setAttribute("data-accepted-visible", false);
     formDataFirstname.setAttribute("data-error", `${ERROR_MESSAGE.onlyChars}`);
     isValid = false;
   } else if (firstname.length < 2) {
-    // vérifie si le champ inséré n'est pas une chaine de caractère inférieure à 2
+    // vérifie si le champ inséré n'est pas une chaine de caractère inférieure à 2 https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/String/length
     formDataFirstname.setAttribute("data-error-visible", true);
     formDataFirstname.setAttribute("data-accepted-visible", false);
     formDataFirstname.setAttribute(
@@ -229,7 +229,7 @@ function validateTournamentNumber() {
     formDataTournaments.setAttribute("data-accepted-visible", false);
     isValid = false;
   } else if (isNaN(tournamentQuantity)) {
-    // iNaN() vérifie si la variable n'est pas un chiffre et renvoie un booléen;
+    // iNaN() vérifie si la variable n'est pas un chiffre et renvoie un booléen https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
     formDataTournaments.setAttribute("data-error-visible", true);
     formDataTournaments.setAttribute(
       "data-error",
@@ -249,7 +249,7 @@ tournamentQuantityField.addEventListener("blur", validateTournamentNumber);
 
 function validateOptions() {
   let isValid = false;
-  const location1 = locationField1.checked; // .checked renvoie un booléen si la case est cochée ou non
+  const location1 = locationField1.checked; // .checked renvoie un booléen si la case est cochée ou non https://www.javascripttutorial.net/javascript-dom/javascript-checkbox/
   const location2 = locationField2.checked;
   const location3 = locationField3.checked;
   const location4 = locationField4.checked;
@@ -264,10 +264,11 @@ function validateOptions() {
     location5 ||
     location6
   ) {
-    optionError.innerHTML = ""; // si au moins une checkbox est cochée(true), alors rien nes'affiche
+    optionError.innerHTML = ""; // si au moins une checkbox est cochée(true), alors rien ne s'affiche
     isValid = true;
   } else {
     optionError.innerHTML = ERROR_MESSAGE.option; // si aucune checkbox n'est cochée, alors on affiche un message d'erreur sous toute sles checkbox
+    // innerHTML permet d'insérer du contenu dans une balise html https://developer.mozilla.org/fr/docs/Web/API/Element/innerHTML
     isValid = false;
   }
   return isValid;
