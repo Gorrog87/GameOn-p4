@@ -88,6 +88,7 @@ const ERROR_MESSAGE = {
   sameAsCurrentDate: "Vous êtez trop jeune pour pouvoir vous inscrire !",
   notAString: "Ce champ n'accepte que des lettres",
   onlyIntegers: "veuillez entrer uniquement des chiffres",
+  onlyPositiveIntegers: "ce champ n'accepte que des nombres positifs",
   onlyChars: "veuillez saisir uniquement des lettres",
   option: "Veuillez cocher un lieu s'il vous plait",
   termsOfUse: "Veuillez accepter les termes et conditions",
@@ -237,6 +238,10 @@ function validateTournamentNumber() {
     );
     formDataTournaments.setAttribute("data-accepted-visible", false);
     isValid = false;
+  } else if (tournamentQuantity < 0) {
+    formDataTournaments.setAttribute("data-error-visible", true);
+    formDataTournaments.setAttribute("data-error", `${ERROR_MESSAGE.onlyPositiveIntegers}`);
+    formDataTournaments.setAttribute("data-accepted-visible", false);
   } else {
     formDataTournaments.setAttribute("data-accepted-visible", true);
     formDataTournaments.setAttribute("data-error-visible", false);
